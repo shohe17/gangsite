@@ -2,7 +2,7 @@
   //呼び出し
   require_once('function.php');
   require_once('dbconnect.php');
-  //やりたいことを選択
+  //$stmtに引数が指定されてるprepareを
   $stmt = $dbh->prepare('SELECT * FROM surveys');
   //prepareを出力
   $stmt->execute();
@@ -20,8 +20,11 @@
 <body>
   <!-- foreachで配列されているnicknameから順に処理していく -->
   <?php foreach($results as $result): ?>
+    <!-- h関数の$result変数名のnickname変数値を出力する -->
     <p><?php echo h($result['nickname']); ?></p>
+    <!-- h関数の$result変数名のemail変数値を出力する -->
     <p><?php echo h($result['email']); ?></p>
+    <!-- h関数の$result変数名のcontent変数値を出力する -->
     <p><?php echo h($result['content']); ?></p>
   <?php endforeach; ?>
 </body>

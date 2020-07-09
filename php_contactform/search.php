@@ -4,8 +4,10 @@
 
   //$nicknameに空白を代入
   $nickname = '';
-  //もしデータにある名前を取得できたとき
+  //もしデータにある名前を取得できたときに実行
   if (isset($_GET['nickname'])) {
+    //$nicknameに$_GET['nickname']を代入
+    //GETされたときにnicknameに代入する
     $nickname = $_GET['nickname'];
 }
 
@@ -14,7 +16,7 @@
   $stmt = $dbh->prepare('SELECT * FROM surveys WHERE nickname like ?');
   //nicknameの一部が合っていれば出力するように指定
   $stmt->execute(["%$nickname%"]);
-  //全てを見込み
+  //全てを読み込み
   $results = $stmt->fetchAll();
 ?>
 
@@ -32,8 +34,11 @@
   </form>
   <!-- 画面への表示 -->
   <?php foreach ($results as $result): ?>
+    <!-- h関数の$result変数名がnickname変数値を呼び出す -->
     <p><?php echo h($result['nickname']); ?></p>
+    <!-- h関数の$result変数名がemail変数値を呼び出す -->
     <p><?php echo h($result['email']); ?></p>
+    <!-- h関数の$result変数名がcontent変数値を呼び出す -->
     <p><?php echo h($result['content']); ?></p>
   <?php endforeach; ?>
 </body>

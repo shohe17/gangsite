@@ -8,13 +8,19 @@
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     header('Location: index.php');
   }
-
+  //$nickname変数に$_POST['nickname']を代入、
+  //POSTされてきた値を$nicknameに代入する
   $nickname = $_POST['nickname'];
+  //$email変数に$_POST['email']を代入、
+  //POSTされてきた値を$nicknameに代入する
   $email = $_POST['email'];
+  //$content変数に$_POST['content']を代入、
+  //POSTされてきた値を$contentに代入する
   $content = $_POST['content'];
-
+  //prepare関数の()内を実施する　serveryテーブルのnickname, email, contentに？を挿入する
   $stmt = $dbh->prepare('INSERT INTO surveys (nickname, email, content) VALUE (?, ?, ?)');
-  $stmt->execute([$nickname, $email, $content]);//?を変数に置き換えてSQLを実行
+  //?を変数に置き換えてSQLを実行
+  $stmt->execute([$nickname, $email, $content]);
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +31,11 @@
 </head>
 <body>
   <h2>お問い合わせありがとうございました！</h2>
+  <!-- $nicknameを出力する -->
   <p><?php echo $nickname; ?></p>
+  <!-- $emailを出力する -->
   <p><?php echo $email; ?></p>
+  <!-- $contentを出力する -->
   <p><?php echo $content; ?></p>
 </body>
 </html>
